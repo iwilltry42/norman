@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/rancher/norman/v2/pkg/types"
+	"github.com/iwilltry42/norman/v3/pkg/types"
 )
 
 func MuxURLParser(rw http.ResponseWriter, req *http.Request, schemas *types.Schemas) (ParsedURL, error) {

@@ -1,8 +1,8 @@
 package data
 
 import (
-	"github.com/rancher/norman/v2/pkg/types/convert"
-	"github.com/rancher/norman/v2/pkg/types/values"
+	"github.com/iwilltry42/norman/v3/pkg/types/convert"
+	"github.com/iwilltry42/norman/v3/pkg/types/values"
 )
 
 type List []map[string]interface{}

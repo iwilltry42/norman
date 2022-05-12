@@ -4,10 +4,10 @@ import (
 	"encoding/json"
 	"strings"
 
-	"github.com/rancher/norman/v2/pkg/httperror"
-	"github.com/rancher/norman/v2/pkg/store/empty"
-	"github.com/rancher/norman/v2/pkg/types"
-	"github.com/rancher/norman/v2/pkg/types/definition"
+	"github.com/iwilltry42/norman/v3/pkg/httperror"
+	"github.com/iwilltry42/norman/v3/pkg/store/empty"
+	"github.com/iwilltry42/norman/v3/pkg/types"
+	"github.com/iwilltry42/norman/v3/pkg/types/definition"
 )
 
 type Store struct {

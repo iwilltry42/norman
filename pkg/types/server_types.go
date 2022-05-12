@@ -7,9 +7,9 @@ import (
 	"net/url"
 	"reflect"
 
-	"github.com/rancher/norman/v2/pkg/data"
-	"github.com/rancher/norman/v2/pkg/types/convert"
-	"github.com/rancher/norman/v2/pkg/types/values"
+	"github.com/iwilltry42/norman/v3/pkg/data"
+	"github.com/iwilltry42/norman/v3/pkg/types/convert"
+	"github.com/iwilltry42/norman/v3/pkg/types/values"
 	"k8s.io/apiserver/pkg/authentication/user"
 	"k8s.io/apiserver/pkg/endpoints/request"
 )

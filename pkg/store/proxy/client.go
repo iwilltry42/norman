@@ -3,8 +3,8 @@ package proxy
 import (
 	"fmt"
 
-	"github.com/rancher/norman/v2/pkg/httperror"
-	"github.com/rancher/norman/v2/pkg/types"
+	"github.com/iwilltry42/norman/v3/pkg/httperror"
+	"github.com/iwilltry42/norman/v3/pkg/types"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/apiserver/pkg/endpoints/request"
 	"k8s.io/client-go/dynamic"

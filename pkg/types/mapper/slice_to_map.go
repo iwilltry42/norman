@@ -3,9 +3,9 @@ package mapper
 import (
 	"fmt"
 
-	"github.com/rancher/norman/v2/pkg/data"
-	"github.com/rancher/norman/v2/pkg/types"
-	definition2 "github.com/rancher/norman/v2/pkg/types/definition"
+	"github.com/iwilltry42/norman/v3/pkg/data"
+	"github.com/iwilltry42/norman/v3/pkg/types"
+	definition2 "github.com/iwilltry42/norman/v3/pkg/types/definition"
 )
 
 type SliceToMap struct {

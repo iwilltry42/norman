@@ -3,9 +3,9 @@ package access
 import (
 	"fmt"
 
-	"github.com/rancher/norman/v2/pkg/parse/builder"
-	"github.com/rancher/norman/v2/pkg/types"
-	"github.com/rancher/norman/v2/pkg/types/convert"
+	"github.com/iwilltry42/norman/v3/pkg/parse/builder"
+	"github.com/iwilltry42/norman/v3/pkg/types"
+	"github.com/iwilltry42/norman/v3/pkg/types/convert"
 )
 
 func ByID(context *types.APIRequest, typeName string, id string, into interface{}) error {

@@ -3,8 +3,8 @@ package subscribe
 import (
 	"io"
 
-	"github.com/rancher/norman/v2/pkg/api/writer"
-	"github.com/rancher/norman/v2/pkg/types"
+	"github.com/iwilltry42/norman/v3/pkg/api/writer"
+	"github.com/iwilltry42/norman/v3/pkg/types"
 )
 
 type Converter struct {

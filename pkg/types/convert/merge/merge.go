@@ -3,9 +3,9 @@ package merge
 import (
 	"strings"
 
-	"github.com/rancher/norman/v2/pkg/types"
-	convert2 "github.com/rancher/norman/v2/pkg/types/convert"
-	definition2 "github.com/rancher/norman/v2/pkg/types/definition"
+	"github.com/iwilltry42/norman/v3/pkg/types"
+	convert2 "github.com/iwilltry42/norman/v3/pkg/types/convert"
+	definition2 "github.com/iwilltry42/norman/v3/pkg/types/definition"
 )
 
 func APIUpdateMerge(schema *types.Schema, schemas *types.Schemas, dest, src map[string]interface{}, replace bool) map[string]interface{} {

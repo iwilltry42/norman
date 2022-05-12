@@ -1,8 +1,8 @@
 package handler
 
 import (
-	"github.com/rancher/norman/v2/pkg/httperror"
-	"github.com/rancher/norman/v2/pkg/types"
+	"github.com/iwilltry42/norman/v3/pkg/httperror"
+	"github.com/iwilltry42/norman/v3/pkg/types"
 )
 
 func UpdateHandler(apiOp *types.APIRequest) (types.APIObject, error) {

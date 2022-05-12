@@ -1,10 +1,7 @@
-FROM golang:1.13-alpine
+FROM golang:1.18-alpine
 
 RUN apk -U add bash git gcc musl-dev docker
-RUN go get -d golang.org/x/lint/golint && \
-    git -C /go/src/golang.org/x/lint/golint checkout -b current 06c8688daad7faa9da5a0c2f163a3d14aac986ca && \
-    go install golang.org/x/lint/golint && \
-    rm -rf /go/src /go/pkg
+RUN curl -sL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s v1.46.1;
 
 ENV DAPPER_SOURCE /go/src/github.com/rancher/norman/
 ENV DAPPER_OUTPUT ./bin ./dist

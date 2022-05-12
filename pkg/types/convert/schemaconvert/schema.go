@@ -1,8 +1,8 @@
 package schemaconvert
 
 import (
-	"github.com/rancher/norman/v2/pkg/types"
-	convert2 "github.com/rancher/norman/v2/pkg/types/convert"
+	"github.com/iwilltry42/norman/v3/pkg/types"
+	convert2 "github.com/iwilltry42/norman/v3/pkg/types/convert"
 )
 
 func ToInternal(from interface{}, schema *types.Schema, target interface{}) error {

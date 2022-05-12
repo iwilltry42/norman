@@ -1,8 +1,8 @@
 package mapper
 
 import (
-	"github.com/rancher/norman/v2/pkg/data"
-	"github.com/rancher/norman/v2/pkg/types"
+	"github.com/iwilltry42/norman/v3/pkg/data"
+	"github.com/iwilltry42/norman/v3/pkg/types"
 )
 
 type DefaultMapper struct {

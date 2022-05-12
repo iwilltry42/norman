@@ -4,7 +4,7 @@ var typeTemplate = `package client
 
 {{- if .schema | hasGet }}
 import (
-	"github.com/rancher/norman/v2/types"
+	"github.com/iwilltry42/norman/v3/types"
 	"k8s.io/apimachinery/pkg/util/intstr"
 )
 {{- end}}

@@ -6,8 +6,8 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/rancher/norman/v2/pkg/types"
-	"github.com/rancher/norman/v2/pkg/urlbuilder"
+	"github.com/iwilltry42/norman/v3/pkg/types"
+	"github.com/iwilltry42/norman/v3/pkg/urlbuilder"
 )
 
 const (

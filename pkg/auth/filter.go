@@ -6,6 +6,8 @@ import (
 	"strings"
 	"time"
 
+	authenticationv1 "k8s.io/api/authentication/v1"
+	"k8s.io/apimachinery/pkg/util/wait"
 	"k8s.io/apiserver/pkg/authentication/authenticator"
 	"k8s.io/apiserver/pkg/authentication/token/cache"
 	"k8s.io/apiserver/pkg/authentication/user"
@@ -69,7 +71,22 @@ func WebhookConfigForURL(url string) (string, error) {
 }
 
 func NewWebhookAuthenticator(cacheTTL time.Duration, kubeConfigFile string) (Authenticator, error) {
-	wh, err := webhook.New(kubeConfigFile, nil)
+
+	config, err := clientcmd.LoadFromFile(kubeConfigFile)
+	if err != nil {
+		return nil, err
+	}
+	configyaml, err := clientcmd.Write(*config)
+	if err != nil {
+		return nil, err
+	}
+
+	restConfig, err := clientcmd.RESTConfigFromKubeConfig(configyaml)
+	if err != nil {
+		return nil, err
+	}
+
+	wh, err := webhook.New(restConfig, authenticationv1.SchemeGroupVersion.Version, nil, wait.Backoff{})
 	if err != nil {
 		return nil, err
 	}

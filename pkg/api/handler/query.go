@@ -3,8 +3,8 @@ package handler
 import (
 	"sort"
 
-	"github.com/rancher/norman/v2/pkg/types"
-	"github.com/rancher/norman/v2/pkg/types/convert"
+	"github.com/iwilltry42/norman/v3/pkg/types"
+	"github.com/iwilltry42/norman/v3/pkg/types/convert"
 )
 
 func QueryFilter(opts *types.QueryOptions, schema *types.Schema, data types.APIObject) types.APIObject {

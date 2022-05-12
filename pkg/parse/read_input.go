@@ -6,12 +6,10 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/rancher/norman/v2/pkg/httperror"
-	"github.com/rancher/norman/v2/pkg/types"
+	"github.com/iwilltry42/norman/v3/pkg/httperror"
+	"github.com/iwilltry42/norman/v3/pkg/types"
 	"k8s.io/apimachinery/pkg/util/yaml"
 )
-
-const reqMaxSize = (2 * 1 << 20) + 1
 
 var bodyMethods = map[string]bool{
 	http.MethodPut:  true,

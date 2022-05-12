@@ -7,9 +7,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/rancher/norman/v2/pkg/types/convert"
-	"github.com/rancher/norman/v2/pkg/types/definition"
-	"github.com/rancher/norman/v2/pkg/types/slice"
+	"github.com/iwilltry42/norman/v3/pkg/types/convert"
+	"github.com/iwilltry42/norman/v3/pkg/types/definition"
+	"github.com/iwilltry42/norman/v3/pkg/types/slice"
 	"github.com/sirupsen/logrus"
 )
 

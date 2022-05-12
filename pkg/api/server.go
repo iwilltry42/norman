@@ -3,14 +3,14 @@ package api
 import (
 	"net/http"
 
-	"github.com/rancher/norman/v2/pkg/api/access"
-	"github.com/rancher/norman/v2/pkg/api/handler"
-	"github.com/rancher/norman/v2/pkg/api/writer"
-	"github.com/rancher/norman/v2/pkg/authorization"
-	"github.com/rancher/norman/v2/pkg/httperror"
-	errhandler "github.com/rancher/norman/v2/pkg/httperror/handler"
-	"github.com/rancher/norman/v2/pkg/parse"
-	"github.com/rancher/norman/v2/pkg/types"
+	"github.com/iwilltry42/norman/v3/pkg/api/access"
+	"github.com/iwilltry42/norman/v3/pkg/api/handler"
+	"github.com/iwilltry42/norman/v3/pkg/api/writer"
+	"github.com/iwilltry42/norman/v3/pkg/authorization"
+	"github.com/iwilltry42/norman/v3/pkg/httperror"
+	errhandler "github.com/iwilltry42/norman/v3/pkg/httperror/handler"
+	"github.com/iwilltry42/norman/v3/pkg/parse"
+	"github.com/iwilltry42/norman/v3/pkg/types"
 	"github.com/rancher/wrangler/pkg/merr"
 )
 

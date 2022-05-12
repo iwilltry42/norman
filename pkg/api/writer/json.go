@@ -6,12 +6,12 @@ import (
 	"net/http"
 	"reflect"
 
-	"github.com/rancher/norman/v2/pkg/data"
-	"github.com/rancher/norman/v2/pkg/parse"
-	"github.com/rancher/norman/v2/pkg/parse/builder"
-	"github.com/rancher/norman/v2/pkg/types"
-	"github.com/rancher/norman/v2/pkg/types/convert"
-	"github.com/rancher/norman/v2/pkg/types/definition"
+	"github.com/iwilltry42/norman/v3/pkg/data"
+	"github.com/iwilltry42/norman/v3/pkg/parse"
+	"github.com/iwilltry42/norman/v3/pkg/parse/builder"
+	"github.com/iwilltry42/norman/v3/pkg/types"
+	"github.com/iwilltry42/norman/v3/pkg/types/convert"
+	"github.com/iwilltry42/norman/v3/pkg/types/definition"
 	"github.com/sirupsen/logrus"
 )
 

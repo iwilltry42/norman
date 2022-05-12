@@ -1,6 +1,7 @@
 package proxy
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -9,9 +10,9 @@ import (
 	"sync"
 
 	"github.com/pkg/errors"
-	"github.com/rancher/norman/v2/pkg/types"
-	"github.com/rancher/norman/v2/pkg/types/convert"
-	"github.com/rancher/norman/v2/pkg/types/values"
+	"github.com/iwilltry42/norman/v3/pkg/types"
+	"github.com/iwilltry42/norman/v3/pkg/types/convert"
+	"github.com/iwilltry42/norman/v3/pkg/types/values"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/sync/errgroup"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -48,7 +49,7 @@ func (s *Store) byID(apiOp *types.APIRequest, schema *types.Schema, id string) (
 		return "", nil, err
 	}
 
-	resp, err := k8sClient.Get(id, metav1.GetOptions{})
+	resp, err := k8sClient.Get(context.Background(), id, metav1.GetOptions{})
 	if err != nil {
 		return "", nil, err
 	}
@@ -81,7 +82,7 @@ func (s *Store) List(apiOp *types.APIRequest, schema *types.Schema, opt *types.Q
 			return types.APIObject{}, err
 		}
 
-		resultList, err = k8sClient.List(listOpts(apiOp))
+		resultList, err = k8sClient.List(context.Background(), listOpts(apiOp))
 		if err != nil {
 			return types.APIObject{}, err
 		}
@@ -140,7 +141,7 @@ func (s *Store) listNamespace(namespace string, apiOp types.APIRequest, schema *
 		return nil, err
 	}
 
-	return k8sClient.List(listOpts(&apiOp))
+	return k8sClient.List(context.Background(), listOpts(&apiOp))
 }
 
 func returnErr(err error, c chan types.APIEvent) {
@@ -153,7 +154,7 @@ func returnErr(err error, c chan types.APIEvent) {
 func (s *Store) listAndWatch(apiOp *types.APIRequest, k8sClient dynamic.ResourceInterface, schema *types.Schema, w types.WatchRequest, result chan types.APIEvent) {
 	rev := w.Revision
 	if rev == "" {
-		list, err := k8sClient.List(metav1.ListOptions{
+		list, err := k8sClient.List(context.Background(), metav1.ListOptions{
 			Limit: 1,
 		})
 		if err != nil {
@@ -166,7 +167,7 @@ func (s *Store) listAndWatch(apiOp *types.APIRequest, k8sClient dynamic.Resource
 	}
 
 	timeout := int64(60 * 30)
-	watcher, err := k8sClient.Watch(metav1.ListOptions{
+	watcher, err := k8sClient.Watch(context.Background(), metav1.ListOptions{
 		Watch:           true,
 		TimeoutSeconds:  &timeout,
 		ResourceVersion: rev,
@@ -241,7 +242,7 @@ func (s *Store) Create(apiOp *types.APIRequest, schema *types.Schema, params typ
 		return types.APIObject{}, err
 	}
 
-	resp, err := k8sClient.Create(&unstructured.Unstructured{Object: data}, metav1.CreateOptions{})
+	resp, err := k8sClient.Create(context.Background(), &unstructured.Unstructured{Object: data}, metav1.CreateOptions{})
 	if err != nil {
 		return types.APIObject{}, err
 	}
@@ -281,7 +282,7 @@ func (s *Store) Update(apiOp *types.APIRequest, schema *types.Schema, params typ
 			pType = apitypes.JSONPatchType
 		}
 
-		resp, err := k8sClient.Patch(id, pType, bytes, metav1.PatchOptions{})
+		resp, err := k8sClient.Patch(context.Background(), id, pType, bytes, metav1.PatchOptions{})
 		if err != nil {
 			return types.APIObject{}, err
 		}
@@ -299,7 +300,7 @@ func (s *Store) Update(apiOp *types.APIRequest, schema *types.Schema, params typ
 		return types.APIObject{}, fmt.Errorf("metadata.resourceVersion is required for update")
 	}
 
-	resp, err := k8sClient.Update(&unstructured.Unstructured{Object: data}, metav1.UpdateOptions{})
+	resp, err := k8sClient.Update(context.Background(), &unstructured.Unstructured{Object: data}, metav1.UpdateOptions{})
 	if err != nil {
 		return types.APIObject{}, err
 	}
@@ -314,7 +315,7 @@ func (s *Store) Delete(apiOp *types.APIRequest, schema *types.Schema, id string)
 		return types.APIObject{}, err
 	}
 
-	if err := k8sClient.Delete(id, nil); err != nil {
+	if err := k8sClient.Delete(context.Background(), id, metav1.DeleteOptions{}); err != nil {
 		return types.APIObject{}, err
 	}
 
