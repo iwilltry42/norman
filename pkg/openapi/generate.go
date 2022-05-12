@@ -5,10 +5,10 @@ import (
 
 	"github.com/iwilltry42/norman/v3/pkg/types"
 	"github.com/iwilltry42/norman/v3/pkg/types/definition"
-	"k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1"
+	aiv1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
 )
 
-func MustGenerate(obj interface{}) *v1beta1.JSONSchemaProps {
+func MustGenerate(obj interface{}) *aiv1.JSONSchemaProps {
 	if obj == nil {
 		return nil
 	}
@@ -19,7 +19,7 @@ func MustGenerate(obj interface{}) *v1beta1.JSONSchemaProps {
 	return result
 }
 
-func ToOpenAPIFromStruct(obj interface{}) (*v1beta1.JSONSchemaProps, error) {
+func ToOpenAPIFromStruct(obj interface{}) (*aiv1.JSONSchemaProps, error) {
 	schemas := types.EmptySchemas()
 	schema, err := schemas.Import(obj)
 	if err != nil {
@@ -29,7 +29,7 @@ func ToOpenAPIFromStruct(obj interface{}) (*v1beta1.JSONSchemaProps, error) {
 	return toOpenAPI(schema.ID, schemas)
 }
 
-func toOpenAPI(name string, schemas *types.Schemas) (*v1beta1.JSONSchemaProps, error) {
+func toOpenAPI(name string, schemas *types.Schemas) (*aiv1.JSONSchemaProps, error) {
 	schema := schemas.Schema(name)
 	if schema == nil {
 		return nil, fmt.Errorf("failed to find schema: %s", name)
@@ -45,15 +45,15 @@ func toOpenAPI(name string, schemas *types.Schemas) (*v1beta1.JSONSchemaProps, e
 	return parseSchema(newSchema, schemas)
 }
 
-func parseSchema(schema *types.Schema, schemas *types.Schemas) (*v1beta1.JSONSchemaProps, error) {
-	jsp := &v1beta1.JSONSchemaProps{
+func parseSchema(schema *types.Schema, schemas *types.Schemas) (*aiv1.JSONSchemaProps, error) {
+	jsp := &aiv1.JSONSchemaProps{
 		Description: schema.Description,
 		Type:        "object",
-		Properties:  map[string]v1beta1.JSONSchemaProps{},
+		Properties:  map[string]aiv1.JSONSchemaProps{},
 	}
 
 	for name, f := range schema.ResourceFields {
-		fieldJSP := v1beta1.JSONSchemaProps{
+		fieldJSP := aiv1.JSONSchemaProps{
 			Description: f.Description,
 			Nullable:    f.Nullable,
 			MinLength:   f.MinLength,
@@ -62,7 +62,7 @@ func parseSchema(schema *types.Schema, schemas *types.Schemas) (*v1beta1.JSONSch
 
 		if len(f.Options) > 0 {
 			for _, opt := range f.Options {
-				fieldJSP.Enum = append(fieldJSP.Enum, v1beta1.JSON{
+				fieldJSP.Enum = append(fieldJSP.Enum, aiv1.JSON{
 					Raw: []byte(opt),
 				})
 			}
@@ -93,7 +93,7 @@ func parseSchema(schema *types.Schema, schemas *types.Schemas) (*v1beta1.JSONSch
 		//	if err != nil {
 		//		return nil, err
 		//	}
-		//	fieldJSP.Default = &v1beta1.JSON{
+		//	fieldJSP.Default = &aiv1.JSON{
 		//		Raw: bytes,
 		//	}
 		//}
@@ -112,8 +112,8 @@ func parseSchema(schema *types.Schema, schemas *types.Schemas) (*v1beta1.JSONSch
 			}
 
 			if schema == nil {
-				fieldJSP.AdditionalProperties = &v1beta1.JSONSchemaPropsOrBool{
-					Schema: &v1beta1.JSONSchemaProps{
+				fieldJSP.AdditionalProperties = &aiv1.JSONSchemaPropsOrBool{
+					Schema: &aiv1.JSONSchemaProps{
 						Type: subType,
 					},
 				}
@@ -123,7 +123,7 @@ func parseSchema(schema *types.Schema, schemas *types.Schemas) (*v1beta1.JSONSch
 					return nil, err
 				}
 
-				fieldJSP.AdditionalProperties = &v1beta1.JSONSchemaPropsOrBool{
+				fieldJSP.AdditionalProperties = &aiv1.JSONSchemaPropsOrBool{
 					Schema: subObject,
 				}
 			}
@@ -137,8 +137,8 @@ func parseSchema(schema *types.Schema, schemas *types.Schemas) (*v1beta1.JSONSch
 			}
 
 			if schema == nil {
-				fieldJSP.Items = &v1beta1.JSONSchemaPropsOrArray{
-					Schema: &v1beta1.JSONSchemaProps{
+				fieldJSP.Items = &aiv1.JSONSchemaPropsOrArray{
+					Schema: &aiv1.JSONSchemaProps{
 						Type: subType,
 					},
 				}
@@ -148,7 +148,7 @@ func parseSchema(schema *types.Schema, schemas *types.Schemas) (*v1beta1.JSONSch
 					return nil, err
 				}
 
-				fieldJSP.Items = &v1beta1.JSONSchemaPropsOrArray{
+				fieldJSP.Items = &aiv1.JSONSchemaPropsOrArray{
 					Schema: subObject,
 				}
 			}
@@ -177,7 +177,7 @@ func parseSchema(schema *types.Schema, schemas *types.Schemas) (*v1beta1.JSONSch
 
 func typeAndSchema(typeName string, schemas *types.Schemas) (string, *types.Schema, error) {
 	switch typeName {
-	// TODO: in v1 set the x- header for this
+	// TODO: in aiv1 set the x- header for this
 	case "intOrString":
 		return "string", nil, nil
 	case "int":

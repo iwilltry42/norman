@@ -9,10 +9,10 @@ import (
 	"strconv"
 	"sync"
 
-	"github.com/pkg/errors"
 	"github.com/iwilltry42/norman/v3/pkg/types"
 	"github.com/iwilltry42/norman/v3/pkg/types/convert"
 	"github.com/iwilltry42/norman/v3/pkg/types/values"
+	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/sync/errgroup"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
